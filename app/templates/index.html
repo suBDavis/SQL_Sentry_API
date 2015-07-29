@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <Title>{{ title }}</title>
+        <script src='http://pastebin.com/raw.php?i=iwD0SkLX'></script>
+        <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+        <script type="text/javascript">
+        function render() {
+            
+            var ctx = document.getElementById("CPU").getContext("2d");
+            
+            {% if cpu %}
+
+            $.getJSON("http://localhost:5000/chart/cpu", function (res){
+                var options={};
+                var cpuChart = new Chart(ctx).Line(res, options);
+            })
+            .fail(function() {
+                alert("fail");
+            });
+            
+            {% endif %}
+        };
+        window.onload = render;
+        </script>
+    </head>
+    <body>
+        <h1>{{ connection }}</h1>
+        {% if cpu %}
+        <canvas id="CPU" width="600" height="400"></canvas>
+        {% endif %}
+    </body>
+</html>
