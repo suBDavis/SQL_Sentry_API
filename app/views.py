@@ -6,12 +6,13 @@ from utils import utils
 @app.route('/')
 @app.route('/index')
 def index():
-    connection = "Connect"
-    title = 'main'
-    return render_template('index.html'
-        ,title = title
-        ,connection = connection
-        ,cpu = True)
+    # connection = "Connect"
+    # title = 'main'
+    # return render_template('index.html'
+    #     ,title = title
+    #     ,connection = connection
+    #     ,cpu = True)
+    return "SQL Sentry API - Docs page coming soon"
 
 ################################################
 # API 
