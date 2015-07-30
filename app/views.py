@@ -12,7 +12,7 @@ def index():
     #     ,title = title
     #     ,connection = connection
     #     ,cpu = True)
-    return "SQL Sentry API - Docs page coming soon"
+    return "View Help Documentation at https://github.com/suBDavis/SQL_Sentry_API"
 
 ################################################
 # API 
