@@ -15,15 +15,22 @@
             "childJoin" : ["ID", "DeviceID"]
         },
         "connection" : {
-            "query" : " SELECT [ObjectID], [ObjectName], [ServerTimeUtc], [DeviceID] FROM EventSourceConnection WHERE IsPerformanceAnalysisEnabled = 1 ",
-            "param" : ["ObjectID", "ObjectName", "ServerTimeUtc", "DeviceID"],
+            "query" : " SELECT [ID], [ObjectID], [ObjectName], [ServerTimeUtc], [DeviceID] FROM EventSourceConnection WHERE IsPerformanceAnalysisEnabled = 1 ",
+            "param" : ["ID", "ObjectID", "ObjectName", "ServerTimeUtc", "DeviceID"],
             "modifier" : "ObjectID",
-            "child" : "null", 
-            "childJoin" : [""]
+            "child" : "counter", 
+            "childJoin" : ["ID", "EventSourceConnectionID"]
+        },
+        "counter" : {
+            "query" : "SELECT [DeviceID] ,[EventSourceConnectionID] ,[CounterName] ,[COUNTER].[CounterResourceName] ,[Timestamp] ,[Value] ,[InstanceName] FROM [dbo].[PerformanceAnalysisData] AS DATA JOIN [PerformanceAnalysisCounter] AS [COUNTER] ON [COUNTER].[ID] = [DATA].[PerformanceAnalysisCounterID] JOIN [PerformanceAnalysisCounterName] AS [NAME] on [COUNTER].[CounterResourceName] = [NAME].[CounterResourceName] WHERE [Timestamp] = (SELECT MAX([Timestamp]) FROM PerformanceAnalysisData) AND ( [COUNTER].[CounterResourceName] = 'BATCH_REQUESTS_PER_SEC' OR [COUNTER].[CounterResourceName] = 'PAGE_LIFE_EXPECTANCY' OR ( [COUNTER].[CounterResourceName] = 'PERCENT_PROCESSOR_TIME' AND [InstanceName] = '_Total' ) OR [COUNTER].[CounterResourceName] = 'PROCESSES_BLOCKED' OR [COUNTER].[CounterResourceName] = 'PROCESSOR_QUEUE_LENGTH' OR [COUNTER].[CounterResourceName] = 'IO_READ_BYTES_PER_SEC' OR [COUNTER].[CounterResourceName] = 'IO_WRITE_BYTES_PER_SEC' OR [COUNTER].[CounterResourceName] = 'PAGE_FAULTS_PER_SEC' OR [COUNTER].[CounterResourceName] = 'SQL_COMPILATIONS_PER_SEC' OR [COUNTER].[CounterResourceName] = 'SQL_RE-COMPILATIONS_PER_SEC' OR [COUNTER].[CounterResourceName] = 'USER_CONNECTIONS' )",
+            "param" : ["DeviceID", "EventSourceConnectionID", "CounterName", "CounterResourceName", "Timestamp", "Value", "InstanceName"],
+            "modifier" : "EventSourceConnectionID", 
+            "child" : "null",
+            "childJoin": "null"
         }
     },
     "config" : {
-        "hostname" : "localhost",
-        "db" : "SQLSentry85"
+        "hostname" : "Q-Regression",
+        "db" : "SQLSentry"
     }
 }

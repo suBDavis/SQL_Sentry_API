@@ -12,7 +12,7 @@ class response:
         self.childType = config.getCnf().getChildType(self.type)
         self.childJoin = config.getCnf().getChildJoin(self.type)
         self.fields = config.getCnf().getFields(self.type)
-        self.modifier = "DomainName"#config.getCnf().getModifier(self.type)
+        self.modifier = config.getCnf().getModifier(self.type)
         self.response = []
 
     def packChildren(self):
@@ -72,8 +72,8 @@ class response:
 
     def generate(self):
         self.pack()
-        #if (self.withChildren):
-        self.packChildren()
+        if (self.withChildren):
+            self.packChildren()
         return self.response
 
 class sql:
