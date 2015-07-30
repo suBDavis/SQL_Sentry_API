@@ -22,14 +22,6 @@ class response:
             parentField = self.childJoin[0]
             childField = self.childJoin[1]
             targetChildren = []
-            # targetParent = self.response[self.type][0]
-                
-            # for c in allChildren[self.childType]:
-                
-            #     if c[childField] == targetParent[parentField]:
-            #         targetChildren.append(c)
-
-            # targetParent[self.childType] = (targetChildren)
 
             i = 0
             for p in self.response[self.type]:
@@ -61,14 +53,14 @@ class response:
                 i += 1
             self.response.append(rdict)
 
-        # Check to see if we want all, or just one
         if self.oid != "all":
-            responseCopy = list(self.response)
-            for r in responseCopy:
-                if str(r[self.modifier]) != self.oid:
-                    self.response.remove(r)
-
-        self.response = { self.type : self.response }
+            newResponse = []
+            for r in self.response:
+                if str(r[self.modifier]) == self.oid:
+                    newResponse.append(r)
+            self.response = { self.type : newResponse }
+        else:
+            self.response = {self.type : self.response }
 
     def generate(self):
         self.pack()
@@ -89,7 +81,7 @@ class sql:
         self.cursor.execute("USE " + self.dbname + ";")
 
     def runQuery(self, q):
-        print("Running " + q)
+        #print("Running " + q)
         self.cursor.execute(q)
         return self.cursor
 
