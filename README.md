@@ -1,4 +1,4 @@
-# SQL-Sentry-API
+# SQL Sentry API
 
 ## Setup and Installation
 
