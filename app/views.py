@@ -19,25 +19,30 @@ def index():
 
 @app.route('/device')
 def deviceAll():
-    devices = utils.getConn().getDevice("all")
+    devices = utils.response("device", "all", False).generate()
     return flask.jsonify(devices)
 
 @app.route('/device/<oid>')
 def device(oid):
-    devices = utils.getConn().getDevice(oid)
+    devices = utils.response("device", oid, True).generate()
     return flask.jsonify(devices)
 
 @app.route('/connection')
 def connectionAll():
-    cons = utils.getConn().getConnection("all")
+    cons = utils.response("connection", "all", False).generate()
     return flask.jsonify(cons)
 
 @app.route('/connection/<oid>')
 def connection(oid):
-    cons = utils.getConn().getConnection(oid)
+    cons = utils.response("connection", oid, True).generate()
     return flask.jsonify(cons)
 
 @app.route('/site')
 def siteAll():
-    site = utils.getConn().getSite("all")
+    site = utils.response("site", "all", False).generate()
+    return flask.jsonify(site)
+
+@app.route('/site/<oid>')
+def site(oid):
+    site = utils.response("site", oid, True).generate()
     return flask.jsonify(site)

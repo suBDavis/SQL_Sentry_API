@@ -1,22 +1,25 @@
 {
     "queries" : {
-        "device" : {
-            "query" : " select [ID],[ObjectID],[HostName],[DomainName],[ParentSiteObjectID] from device ",
-            "param" : ["ID", "ObjectID", "HostName", "DomainName", "ParentSite"],
-            "modifier" : [ " where [ObjectID] = ", " WHERE [SiteID] = " ],
-            "child" : "connection"
-        },
         "site" : {
             "query" : " select ID, ObjectID, Name, Description, ParentSiteObjectID from Site ",
             "param" : ["ID", "ObjectID", "Name", "Description", "ParentSite"],
-            "modifier" : [  " where [ObjectID] = " ],
-            "child" : "device"
+            "modifier" : "ObjectID",
+            "child" : "device",
+            "childJoin" : ["ObjectID", "ParentSiteObjectID"]            
+        },
+        "device" : {
+            "query" : " select [ID],[ObjectID],[HostName],[DomainName],[ParentSiteObjectID] from device ",
+            "param" : ["ID", "ObjectID", "HostName", "DomainName", "ParentSiteObjectID"],
+            "modifier" : "ObjectID",
+            "child" : "connection",
+            "childJoin" : ["ID", "DeviceID"]
         },
         "connection" : {
             "query" : " SELECT [ObjectID], [ObjectName], [ServerTimeUtc], [DeviceID] FROM EventSourceConnection WHERE IsPerformanceAnalysisEnabled = 1 ",
             "param" : ["ObjectID", "ObjectName", "ServerTimeUtc", "DeviceID"],
-            "modifier" : [  "AND [ObjectID] = ", " AND [DeviceID] = " ],
-            "child" : "counter"
+            "modifier" : "ObjectID",
+            "child" : "null", 
+            "childJoin" : [""]
         }
     },
     "config" : {
