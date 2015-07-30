@@ -1,4 +1,8 @@
 {
+    "config" : {
+        "hostname" : "CHANGE THIS",
+        "db" : "SQLSentry"
+    },
     "queries" : {
         "site" : {
             "query" : " select ID, ObjectID, Name, Description, ParentSiteObjectID from Site ",
@@ -28,9 +32,5 @@
             "child" : "null",
             "childJoin": "null"
         }
-    },
-    "config" : {
-        "hostname" : "Q-Regression",
-        "db" : "SQLSentry"
     }
 }
