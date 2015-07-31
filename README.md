@@ -1,12 +1,14 @@
 # SQL Sentry API
 
+The beginnings of a lightweight self-hoted RESTful HTTP API for fetching performance data from the SQL Sentry Database and presenting it as nice bite-sized JSON objects.  The API webserver should be hosted by _you_!
+
 ## Setup and Installation
 
 1) Download or clone this Repo onto a local machine with access to your SQL Sentry database.  
 
 2) Install Python 3.4 EXACTLY as detailed @ http://www.howtogeek.com/197947/how-to-install-python-on-windows/
 
-3) Install dependancies: open an admin command prompt:
+3) Install dependencies: open an admin command prompt:
 ```
 pip install flask
 pip install pymssql
@@ -57,8 +59,8 @@ UNDER NO CIRCUMSTANCES will any writes / updates / other data alterations be sen
 
 ##Troubleshooting
 
-If you have trouble, feel free to email admin[at]redspin[dot]net
+If you have trouble, feel free to email admin[at]redspin[dot]net or submit a bug or feature request.
 
-## License Agreement
+## Disclaimer
 
 This is software is provided as-is.  It is not supported, endorsed, or maintained by SQL Sentry, LLC.  It's an open source third party API intended to be hosted on-prem.
