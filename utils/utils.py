@@ -50,6 +50,9 @@ class response:
             i = 0
             for f in self.fields:
                 rdict[f] = row[i]
+                if (f.lower() == "timestamp"):
+                    #This is a timestamp.  Convert it to something.  ANYTHING
+                    rdict[f] = self.toEpoch(row[i])
                 i += 1
             self.response.append(rdict)
 
@@ -67,6 +70,15 @@ class response:
         if (self.withChildren):
             self.packChildren()
         return self.response
+
+    def toEpoch(self, time):
+        return time * 5 + 946684800
+
+    def getHistory(self, n):
+        history = []
+        for i in range(0, n):
+            history.append(response(self.type, self.oid, False))
+
 
 class sql:
 

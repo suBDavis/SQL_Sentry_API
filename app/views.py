@@ -30,7 +30,7 @@ def device(oid):
 
 @app.route('/connection')
 def connectionAll():
-    cons = utils.response("connection", "all", True).generate()
+    cons = utils.response("connection", "all", False).generate()
     return flask.jsonify(cons)
 
 @app.route('/connection/<oid>')
@@ -52,3 +52,10 @@ def site(oid):
 def counter(oid):
     counter = utils.response("counter", oid, True).generate()
     return flask.jsonify(counter)
+
+@app.route('/counter/<oid>/history/<n>')
+def counterMulti(oid, n):
+    counter = utils.response("counter", oid, True)
+    counter.getHistory(n)
+    reply = counter.generate()
+    return flask.jsonify(reply)
